@@ -1,0 +1,55 @@
+COYOTV — página de inicio web
+=============================
+
+Qué incluye
+-----------
+- Diseño adaptable a celular y computadora.
+- Fondo urbano animado en CSS (sin descargar un video pesado).
+- Logo Coyotv proporcionado por el usuario.
+- Reproductor de YouTube con controles propios de play/pausa y volumen.
+- Preparado para conectar un dominio propio más adelante.
+
+ANTES DE PUBLICAR
+-----------------
+1. Abre index.html con un editor de texto.
+2. Busca esta línea:
+   const YOUTUBE_VIDEO_ID = "PEGA_AQUI_EL_ID_DEL_DIRECTO";
+3. Sustituye PEGA_AQUI_EL_ID_DEL_DIRECTO por el ID del video/directo.
+   Ejemplo: URL https://www.youtube.com/watch?v=AbCdEf12345
+   ID: AbCdEf12345
+4. Guarda el archivo.
+
+Importante sobre el reproductor
+-------------------------------
+La página usa la API oficial de YouTube para ocultar los controles estándar
+y mostrar controles propios. Esto no elimina todas las marcas de YouTube ni
+garantiza que cualquier directo permita inserción. El video debe permitir
+reproducción integrada. En dispositivos móviles, la reproducción puede requerir
+una pulsación explícita del usuario.
+
+Cómo probar localmente
+----------------------
+Abre index.html en un navegador con conexión a internet. La página carga la
+API del reproductor desde YouTube. Para una prueba más fiable, publícala primero
+en un alojamiento estático HTTPS gratuito.
+
+Publicación gratuita sugerida: GitHub Pages
+-------------------------------------------
+1. Crea/inicia sesión en https://github.com/
+2. Crea un repositorio público, por ejemplo "coyotv-web".
+3. Sube index.html, LEEME.txt y la carpeta assets con coyotv-logo.jpg.
+4. En Settings > Pages, selecciona publicar desde la rama principal (main)
+   y la carpeta raíz (/).
+5. GitHub te dará una dirección web gratuita. Después podrás conectar dominio
+   propio desde la misma sección si compras uno.
+
+Edición visual posterior
+------------------------
+Esta primera versión es un sitio estático con configuración sencilla. Para
+mover elementos como en Canva, después podemos migrar el diseño a un constructor
+visual que permita incrustar HTML o usar este sitio como plantilla. No se incluye
+una interfaz visual de arrastrar y soltar dentro de esta primera versión.
+
+Logo
+----
+El archivo assets/coyotv-logo.jpg conserva la imagen original que compartiste.

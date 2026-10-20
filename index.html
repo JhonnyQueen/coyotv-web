@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#05070c">
+<meta name="description" content="Coyotv: desde Neza, para todo el Oriente. Información, entretenimiento y la voz de nuestro barrio.">
+<title>COYOTV — Desde Neza, para todo el Oriente</title>
+<style>
+:root{--cyan:#00d9f5;--red:#ff2638;--ink:#05070c;--white:#f5f7fb}
+*{box-sizing:border-box}
+html{min-height:100%;background:var(--ink)}
+body{margin:0;color:var(--white);font-family:Arial,Helvetica,sans-serif;background:var(--ink);min-height:100vh;overflow-x:hidden}
+.urban-bg{position:fixed;inset:0;z-index:-3;overflow:hidden;background:radial-gradient(ellipse at 75% 35%,#102e50 0%,transparent 42%),radial-gradient(ellipse at 20% 75%,#32111d 0%,transparent 44%),linear-gradient(145deg,#05070c 0%,#101727 48%,#05070c 100%)}
+.urban-bg:before{content:"";position:absolute;inset:-20%;background:
+ repeating-linear-gradient(112deg,transparent 0 90px,rgba(0,217,245,.10) 91px 93px,transparent 94px 180px),
+ repeating-linear-gradient(18deg,transparent 0 125px,rgba(255,38,56,.08) 126px 128px,transparent 129px 230px);
+ transform:skewY(-8deg);animation:cityDrift 14s linear infinite}
+.urban-bg:after{content:"";position:absolute;left:-10%;right:-10%;bottom:-8%;height:48%;background:
+ linear-gradient(180deg,transparent,rgba(0,0,0,.78)),
+ repeating-linear-gradient(90deg,transparent 0 28px,rgba(0,217,245,.18) 29px 31px,transparent 32px 70px);
+ clip-path:polygon(0 45%,5% 45%,5% 25%,9% 25%,9% 50%,14% 50%,14% 15%,18% 15%,18% 42%,23% 42%,23% 30%,28% 30%,28% 54%,35% 54%,35% 20%,40% 20%,40% 45%,47% 45%,47% 8%,51% 8%,51% 40%,58% 40%,58% 24%,63% 24%,63% 50%,69% 50%,69% 18%,74% 18%,74% 43%,80% 43%,80% 28%,86% 28%,86% 52%,92% 52%,92% 12%,96% 12%,96% 43%,100% 43%,100% 100%,0 100%);
+ opacity:.62}
+.glow{position:fixed;width:36vw;height:36vw;max-width:480px;max-height:480px;border-radius:50%;filter:blur(85px);opacity:.17;z-index:-2;pointer-events:none}
+.glow.cyan{background:var(--cyan);left:-12%;top:18%;animation:pulse 8s ease-in-out infinite alternate}
+.glow.red{background:var(--red);right:-12%;bottom:8%;animation:pulse 10s ease-in-out infinite alternate-reverse}
+@keyframes cityDrift{from{transform:translateX(-3%) skewY(-8deg)}to{transform:translateX(3%) skewY(-8deg)}}
+@keyframes pulse{from{opacity:.10;transform:scale(.9)}to{opacity:.25;transform:scale(1.12)}}
+.page{width:min(1100px,100%);margin:auto;padding:clamp(18px,4vw,48px) 18px 22px;display:flex;min-height:100vh;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.brand{width:min(310px,66vw);height:auto;display:block;margin:0 auto 16px;mix-blend-mode:screen;filter:drop-shadow(0 0 18px rgba(0,217,245,.12))}
+.eyebrow{font-size:.74rem;letter-spacing:.28em;text-transform:uppercase;color:#c9d2df;margin:0 0 10px}
+h1{font-size:clamp(1.9rem,5vw,3.8rem);line-height:1.02;margin:0;font-weight:900;letter-spacing:-.045em}
+h1 span{color:var(--red);text-shadow:0 0 22px rgba(255,38,56,.2)}
+.intro{font-size:clamp(.95rem,2vw,1.12rem);line-height:1.6;color:#d5dbe5;max-width:650px;margin:15px auto 25px}
+.player-shell{width:min(850px,100%);padding:2px;border-radius:18px;background:linear-gradient(115deg,var(--cyan),#19212c 42%,var(--red));box-shadow:0 0 36px rgba(0,217,245,.10),0 0 50px rgba(255,38,56,.08)}
+.player{border-radius:16px;overflow:hidden;background:#020305}
+.video-wrap{position:relative;width:100%;aspect-ratio:16/9;background:
+ radial-gradient(circle at center,rgba(0,217,245,.10),transparent 40%),#020305;display:flex;align-items:center;justify-content:center}
+#yt-player{position:absolute;inset:0;width:100%;height:100%;border:0}
+.placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:linear-gradient(135deg,rgba(0,217,245,.06),transparent 55%,rgba(255,38,56,.07));pointer-events:none}
+.placeholder strong{font-size:clamp(1.2rem,4vw,2.2rem);letter-spacing:.13em}
+.live-dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--red);box-shadow:0 0 12px var(--red);margin-right:8px}
+.controls{height:64px;display:flex;align-items:center;gap:14px;padding:0 18px;border-top:1px solid #222a36}
+.control-btn{background:transparent;border:1px solid #364150;color:white;border-radius:50%;width:38px;height:38px;display:grid;place-items:center;cursor:pointer;flex:0 0 auto}
+.control-btn:hover{border-color:var(--cyan);color:var(--cyan)}
+.control-btn:focus-visible,input:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+.control-btn svg{width:17px;height:17px;fill:currentColor}
+.control-label{font-size:.72rem;letter-spacing:.14em;color:#c4ccd7;text-transform:uppercase;white-space:nowrap}
+.spacer{flex:1}
+.volume-icon{width:21px;height:21px;fill:#e8edf5;flex:0 0 auto}
+input[type=range]{accent-color:var(--cyan);width:clamp(65px,14vw,125px);cursor:pointer}
+.status{font-size:.78rem;color:#b6c0ce;margin:13px 0 0;min-height:1.2em}
+.footer{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 25px;margin-top:30px;padding-top:17px;border-top:1px solid rgba(255,255,255,.12);width:min(760px,100%);color:#cbd3df;font-size:.75rem;letter-spacing:.13em;text-transform:uppercase}
+.footer span:before{content:"";display:inline-block;width:5px;height:5px;background:var(--red);margin:0 9px 2px 0;border-radius:50%}
+.smallprint{font-size:.72rem;color:#778394;margin-top:18px}
+@media(max-width:520px){.page{padding:25px 13px 18px}.brand{width:min(230px,61vw);margin-bottom:13px}.intro{margin:12px auto 19px}.controls{height:58px;padding:0 10px;gap:9px}.control-label{font-size:.62rem;letter-spacing:.08em}.footer{gap:12px 17px;font-size:.66rem}.status{font-size:.72rem}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="urban-bg" aria-hidden="true"></div><div class="glow cyan" aria-hidden="true"></div><div class="glow red" aria-hidden="true"></div>
+<main class="page">
+  <img class="brand" src="assets/coyotv-logo.jpg" alt="Logotipo oficial de Coyotv">
+  <p class="eyebrow">Tu canal · Tu barrio · Tu voz</p>
+  <h1>¡Bienvenidos a <span>Coyotv!</span></h1>
+  <p class="intro">Desde Neza, para todo el Oriente. Información, entretenimiento y la voz de nuestro barrio.</p>
+  <section class="player-shell" aria-label="Reproductor de Coyotv">
+    <div class="player">
+      <div class="video-wrap">
+        <div id="yt-player"></div>
+        <div class="placeholder" id="placeholder"><strong><span class="live-dot"></span>COYOTV</strong><span class="eyebrow">Transmisión en vivo</span></div>
+      </div>
+      <div class="controls">
+        <button class="control-btn" id="play" aria-label="Reproducir" title="Reproducir o pausar">
+          <svg id="play-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+        <span class="control-label" id="play-label">En vivo</span>
+        <span class="spacer"></span>
+        <svg class="volume-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 4V5L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4.03v8.05A4.5 4.5 0 0 0 16.5 12zm-2.5-9v2.06a7 7 0 0 1 0 13.88V21a9 9 0 0 0 0-18z"/></svg>
+        <input id="volume" type="range" min="0" max="100" value="75" aria-label="Volumen">
+      </div>
+    </div>
+  </section>
+  <p class="status" id="status" role="status">Listos para transmitir desde Neza.</p>
+  <nav class="footer" aria-label="Áreas de Coyotv"><span>Noticias</span><span>Gaming</span><span>Música</span><span>Radio</span><span>Comunidad</span></nav>
+  <p class="smallprint">Coyotv · Desde Neza, para todo el Oriente</p>
+</main>
+<script>
+/* CONFIGURACIÓN RÁPIDA: pega aquí el ID del video o directo de YouTube.
+   Ejemplo de URL: https://www.youtube.com/watch?v=AbCdEf12345
+   El ID sería: AbCdEf12345
+   En YouTube Studio, el directo debe estar iniciado o programado para poder reproducirse. */
+const YOUTUBE_VIDEO_ID = "PEGA_AQUI_EL_ID_DEL_DIRECTO";
+let player, ready = false, playing = false;
+const statusEl = document.getElementById("status");
+const placeholder = document.getElementById("placeholder");
+const playButton = document.getElementById("play");
+const playIcon = document.getElementById("play-icon");
+const playLabel = document.getElementById("play-label");
+const volume = document.getElementById("volume");
+
+function setPlayIcon(isPlaying){
+  playing = isPlaying;
+  playIcon.innerHTML = isPlaying
+    ? '<path d="M6 5h4v14H6zm8 0h4v14h-4z"/>'
+    : '<path d="M8 5v14l11-7z"/>';
+  playButton.setAttribute("aria-label", isPlaying ? "Pausar" : "Reproducir");
+  playLabel.textContent = isPlaying ? "Reproduciendo" : "En vivo";
+}
+function onYouTubeIframeAPIReady(){
+  if(!YOUTUBE_VIDEO_ID || YOUTUBE_VIDEO_ID.includes("PEGA_AQUI")){
+    statusEl.textContent = "Falta configurar el ID del directo de YouTube. Consulta LEEME.txt.";
+    return;
+  }
+  player = new YT.Player("yt-player", {
+    videoId: YOUTUBE_VIDEO_ID,
+    playerVars: {autoplay:0, controls:0, disablekb:1, fs:0, iv_load_policy:3, modestbranding:1, playsinline:1, rel:0},
+    events:{
+      onReady: function(event){ready=true;event.target.setVolume(Number(volume.value));statusEl.textContent="Coyotv está listo para reproducir.";},
+      onStateChange: function(event){
+        if(event.data===YT.PlayerState.PLAYING){setPlayIcon(true);placeholder.style.display="none";statusEl.textContent="Estás viendo Coyotv.";}
+        else if(event.data===YT.PlayerState.PAUSED){setPlayIcon(false);statusEl.textContent="Transmisión pausada.";}
+        else if(event.data===YT.PlayerState.ENDED){setPlayIcon(false);statusEl.textContent="La transmisión ha terminado.";}
+      },
+      onError: function(){statusEl.textContent="No se pudo cargar el video. Revisa el ID y que la inserción esté permitida.";placeholder.style.display="flex";}
+    }
+  });
+}
+playButton.addEventListener("click",()=>{
+  if(!ready || !player){statusEl.textContent="Configura primero el ID del directo en el archivo index.html.";return;}
+  if(playing) player.pauseVideo(); else {player.unMute();player.playVideo();}
+});
+volume.addEventListener("input",()=>{
+  if(ready && player){player.setVolume(Number(volume.value));if(Number(volume.value)===0)player.mute();else player.unMute();}
+});
+const tag=document.createElement("script");tag.src="https://www.youtube.com/iframe_api";document.head.appendChild(tag);
+</script>
+</body>
+</html>
