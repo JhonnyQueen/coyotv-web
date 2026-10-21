@@ -1,139 +1,137 @@
 <!doctype html>
-<html lang="es">
+<html lang="es-MX">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#05070c">
-<meta name="description" content="Coyotv: desde Neza, para todo el Oriente. Información, entretenimiento y la voz de nuestro barrio.">
-<title>COYOTV — Desde Neza, para todo el Oriente</title>
+<meta name="theme-color" content="#070a11">
+<meta name="description" content="Coyotv, desde Neza para todo el Oriente. Televisión digital, periodismo local y entretenimiento.">
+<title>COYOTV | Desde Neza para todo el Oriente</title>
 <style>
-:root{--cyan:#00d9f5;--red:#ff2638;--ink:#05070c;--white:#f5f7fb}
-*{box-sizing:border-box}
-html{min-height:100%;background:var(--ink)}
-body{margin:0;color:var(--white);font-family:Arial,Helvetica,sans-serif;background:var(--ink);min-height:100vh;overflow-x:hidden}
-.urban-bg{position:fixed;inset:0;z-index:-3;overflow:hidden;background:radial-gradient(ellipse at 75% 35%,#102e50 0%,transparent 42%),radial-gradient(ellipse at 20% 75%,#32111d 0%,transparent 44%),linear-gradient(145deg,#05070c 0%,#101727 48%,#05070c 100%)}
-.urban-bg:before{content:"";position:absolute;inset:-20%;background:
- repeating-linear-gradient(112deg,transparent 0 90px,rgba(0,217,245,.10) 91px 93px,transparent 94px 180px),
- repeating-linear-gradient(18deg,transparent 0 125px,rgba(255,38,56,.08) 126px 128px,transparent 129px 230px);
- transform:skewY(-8deg);animation:cityDrift 14s linear infinite}
-.urban-bg:after{content:"";position:absolute;left:-10%;right:-10%;bottom:-8%;height:48%;background:
- linear-gradient(180deg,transparent,rgba(0,0,0,.78)),
- repeating-linear-gradient(90deg,transparent 0 28px,rgba(0,217,245,.18) 29px 31px,transparent 32px 70px);
- clip-path:polygon(0 45%,5% 45%,5% 25%,9% 25%,9% 50%,14% 50%,14% 15%,18% 15%,18% 42%,23% 42%,23% 30%,28% 30%,28% 54%,35% 54%,35% 20%,40% 20%,40% 45%,47% 45%,47% 8%,51% 8%,51% 40%,58% 40%,58% 24%,63% 24%,63% 50%,69% 50%,69% 18%,74% 18%,74% 43%,80% 43%,80% 28%,86% 28%,86% 52%,92% 52%,92% 12%,96% 12%,96% 43%,100% 43%,100% 100%,0 100%);
- opacity:.62}
-.glow{position:fixed;width:36vw;height:36vw;max-width:480px;max-height:480px;border-radius:50%;filter:blur(85px);opacity:.17;z-index:-2;pointer-events:none}
-.glow.cyan{background:var(--cyan);left:-12%;top:18%;animation:pulse 8s ease-in-out infinite alternate}
-.glow.red{background:var(--red);right:-12%;bottom:8%;animation:pulse 10s ease-in-out infinite alternate-reverse}
-@keyframes cityDrift{from{transform:translateX(-3%) skewY(-8deg)}to{transform:translateX(3%) skewY(-8deg)}}
-@keyframes pulse{from{opacity:.10;transform:scale(.9)}to{opacity:.25;transform:scale(1.12)}}
-.page{width:min(1100px,100%);margin:auto;padding:clamp(18px,4vw,48px) 18px 22px;display:flex;min-height:100vh;flex-direction:column;align-items:center;justify-content:center;text-align:center}
-.brand{width:min(310px,66vw);height:auto;display:block;margin:0 auto 16px;mix-blend-mode:screen;filter:drop-shadow(0 0 18px rgba(0,217,245,.12))}
-.eyebrow{font-size:.74rem;letter-spacing:.28em;text-transform:uppercase;color:#c9d2df;margin:0 0 10px}
-h1{font-size:clamp(1.9rem,5vw,3.8rem);line-height:1.02;margin:0;font-weight:900;letter-spacing:-.045em}
-h1 span{color:var(--red);text-shadow:0 0 22px rgba(255,38,56,.2)}
-.intro{font-size:clamp(.95rem,2vw,1.12rem);line-height:1.6;color:#d5dbe5;max-width:650px;margin:15px auto 25px}
-.player-shell{width:min(850px,100%);padding:2px;border-radius:18px;background:linear-gradient(115deg,var(--cyan),#19212c 42%,var(--red));box-shadow:0 0 36px rgba(0,217,245,.10),0 0 50px rgba(255,38,56,.08)}
-.player{border-radius:16px;overflow:hidden;background:#020305}
-.video-wrap{position:relative;width:100%;aspect-ratio:16/9;background:
- radial-gradient(circle at center,rgba(0,217,245,.10),transparent 40%),#020305;display:flex;align-items:center;justify-content:center}
-#yt-player{position:absolute;inset:0;width:100%;height:100%;border:0}
-.placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:linear-gradient(135deg,rgba(0,217,245,.06),transparent 55%,rgba(255,38,56,.07));pointer-events:none}
-.placeholder strong{font-size:clamp(1.2rem,4vw,2.2rem);letter-spacing:.13em}
-.live-dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--red);box-shadow:0 0 12px var(--red);margin-right:8px}
-.controls{height:64px;display:flex;align-items:center;gap:14px;padding:0 18px;border-top:1px solid #222a36}
-.control-btn{background:transparent;border:1px solid #364150;color:white;border-radius:50%;width:38px;height:38px;display:grid;place-items:center;cursor:pointer;flex:0 0 auto}
-.control-btn:hover{border-color:var(--cyan);color:var(--cyan)}
-.control-btn:focus-visible,input:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
-.control-btn svg{width:17px;height:17px;fill:currentColor}
-.control-label{font-size:.72rem;letter-spacing:.14em;color:#c4ccd7;text-transform:uppercase;white-space:nowrap}
-.spacer{flex:1}
-.volume-icon{width:21px;height:21px;fill:#e8edf5;flex:0 0 auto}
-input[type=range]{accent-color:var(--cyan);width:clamp(65px,14vw,125px);cursor:pointer}
-.status{font-size:.78rem;color:#b6c0ce;margin:13px 0 0;min-height:1.2em}
-.footer{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 25px;margin-top:30px;padding-top:17px;border-top:1px solid rgba(255,255,255,.12);width:min(760px,100%);color:#cbd3df;font-size:.75rem;letter-spacing:.13em;text-transform:uppercase}
-.footer span:before{content:"";display:inline-block;width:5px;height:5px;background:var(--red);margin:0 9px 2px 0;border-radius:50%}
-.smallprint{font-size:.72rem;color:#778394;margin-top:18px}
-@media(max-width:520px){.page{padding:25px 13px 18px}.brand{width:min(230px,61vw);margin-bottom:13px}.intro{margin:12px auto 19px}.controls{height:58px;padding:0 10px;gap:9px}.control-label{font-size:.62rem;letter-spacing:.08em}.footer{gap:12px 17px;font-size:.66rem}.status{font-size:.72rem}}
-@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;scroll-behavior:auto!important}}
+:root{color-scheme:dark;--bg:#070a11;--surface:#0d1522;--white:#f6f8fb;--cyan:#18d8ed;--red:#fd3046;--muted:#b6c4d3;--border:rgba(210,237,248,.17)}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--white);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;line-height:1.45;min-width:300px}
+a{color:inherit}
+button{font:inherit;cursor:pointer}
+button:focus-visible,a:focus-visible{outline:3px solid var(--cyan);outline-offset:4px}
+.bg{position:fixed;inset:0;z-index:-2;overflow:hidden;pointer-events:none;background:radial-gradient(ellipse 55% 40% at 80% 10%,#112d41 0%,transparent 75%),radial-gradient(ellipse 60% 50% at 3% 70%,#321322 0%,transparent 75%),linear-gradient(140deg,#070a11,#101726 55%,#05070e)}
+.bg::before{content:"";position:absolute;inset:-45%;opacity:.2;background:repeating-linear-gradient(115deg,transparent 0 75px,#0ff 77px 78px,transparent 80px 180px),repeating-linear-gradient(20deg,transparent 0 145px,#fb3550 147px 148px,transparent 150px 290px);animation:lights 24s linear infinite}
+.bg::after{content:"";position:absolute;bottom:0;left:-5%;width:110%;height:40%;opacity:.2;background:linear-gradient(0deg,#000,transparent 85%),repeating-linear-gradient(90deg,transparent 0 32px,rgba(30,232,246,.8) 33px 34px,transparent 35px 90px);clip-path:polygon(0 58%,5% 58%,5% 30%,11% 30%,11% 64%,18% 64%,18% 12%,24% 12%,24% 55%,29% 55%,29% 32%,35% 32%,35% 66%,41% 66%,41% 20%,48% 20%,48% 54%,53% 54%,53% 4%,58% 4%,58% 50%,64% 50%,64% 28%,69% 28%,69% 68%,75% 68%,75% 18%,82% 18%,82% 48%,89% 48%,89% 31%,95% 31%,95% 57%,100% 57%,100% 100%,0 100%)}
+@keyframes lights{from{transform:translateX(-4%) rotate(-3deg)}to{transform:translateX(4%) rotate(3deg)}}
+.wrapper{max-width:1140px;margin:0 auto;padding:24px clamp(15px,4vw,36px) 40px}
+.header{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:5px 0 22px;border-bottom:1px solid var(--border)}
+.header .brand{display:block;width:clamp(145px,19vw,230px);height:auto;object-fit:contain}
+.header-right{display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:flex-end}
+.header-tag{font-size:.72rem;letter-spacing:.17em;text-transform:uppercase;color:#d1deec;font-weight:750}
+.pill{display:inline-flex;align-items:center;gap:9px;border:1px solid rgba(24,216,237,.42);background:rgba(24,216,237,.1);color:#b8faff;border-radius:100px;padding:9px 13px;text-decoration:none;font-size:.74rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;transition:background .2s}
+.pill:hover{background:rgba(24,216,237,.23)}
+.hero{text-align:center;padding:clamp(30px,5vw,56px) 0 25px}
+.kicker{color:var(--cyan);letter-spacing:.27em;font-size:.69rem;font-weight:850;text-transform:uppercase;margin:0 0 13px}
+h1{font-size:clamp(2rem,6.5vw,4.6rem);line-height:1.07;letter-spacing:-.05em;margin:0;font-weight:900;text-wrap:balance}
+h1 span{color:var(--red)}
+.subhead{color:#d2dae6;font-size:clamp(.98rem,1.9vw,1.22rem);max-width:660px;margin:16px auto 0;line-height:1.65}
+.broadcast{max-width:965px;margin:10px auto 0;border:1px solid rgba(24,216,237,.45);border-radius:22px;padding:2px;background:linear-gradient(125deg,rgba(24,216,237,.5),rgba(0,0,0,0) 50%,rgba(253,48,70,.65));box-shadow:0 14px 60px rgba(0,0,0,.43),0 0 65px rgba(24,216,237,.08)}
+.broadcast-inner{border-radius:19px;overflow:hidden;background:#080d15}
+.broadcast-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:14px 20px;border-bottom:1px solid var(--border)}
+.broadcast-name{font-size:.79rem;letter-spacing:.15em;font-weight:850;text-transform:uppercase}
+.indicator{display:inline-flex;align-items:center;gap:7px;font-size:.7rem;font-weight:850;color:#e7eefa;letter-spacing:.09em;text-transform:uppercase}
+.dot{display:inline-block;height:8px;width:8px;flex:none;background:var(--red);border-radius:50%;box-shadow:0 0 12px rgba(253,48,70,.8)}
+.video{width:100%;aspect-ratio:16/9;background:#030409;position:relative;overflow:hidden}
+.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.player-tools{display:flex;flex-wrap:wrap;align-items:center;gap:9px;padding:13px 17px;border-top:1px solid var(--border)}
+.tool{border:1px solid #465467;border-radius:9px;padding:10px 14px;background:#172235;color:#eef6ff;font-size:.83rem;font-weight:750;transition:background .2s,border-color .2s;display:inline-flex;align-items:center;gap:7px}
+.tool:hover{background:#26334c;border-color:#8192aa}
+.tool.active{color:#06121c;background:var(--cyan);border-color:var(--cyan)}
+.tool.active:hover{background:#91f5ff}
+.tool.secondary{margin-left:auto}
+.tool svg{height:16px;width:16px;fill:currentColor}
+.status{font-size:.77rem;color:#b2bece;margin:12px auto 0;text-align:center;padding:0 12px;min-height:1.4em}
+.grid{display:grid;grid-template-columns:1.2fr 1fr;gap:15px;max-width:965px;margin:27px auto 0}
+.panel{border:1px solid var(--border);background:rgba(9,18,31,.78);border-radius:16px;padding:20px 23px;backdrop-filter:blur(4px)}
+.panel h2{font-size:1rem;letter-spacing:.03em;margin:0 0 10px}
+.panel p{color:#bcc9d7;font-size:.86rem;line-height:1.65;margin:0}
+.text-link{display:inline-block;color:#83effb;text-decoration:underline;text-underline-offset:4px;margin-top:12px;font-size:.83rem;font-weight:750}
+.sections{max-width:965px;margin:28px auto 0;text-align:center}
+.sections-heading{font-size:.76rem;letter-spacing:.18em;color:#b6c5d7;font-weight:900;text-transform:uppercase}
+.tags{display:flex;gap:9px;flex-wrap:wrap;justify-content:center;margin-top:15px}
+.tags span{border:1px solid var(--border);border-radius:60px;padding:10px 16px;font-size:.77rem;font-weight:750;color:#e7edf6;background:rgba(12,21,36,.75)}
+.footer{margin-top:37px;border-top:1px solid var(--border);padding-top:18px;text-align:center;color:#aebacc;font-size:.75rem;letter-spacing:.04em}
+.footer b{color:var(--cyan)}
+@media(max-width:650px){.wrapper{padding:15px 12px 28px}.header{padding-bottom:13px}.header .brand{width:135px}.header-tag{display:none}.header-right .pill{font-size:.64rem;padding:9px 10px}.hero{padding:32px 0 18px}.broadcast-head{padding:12px}.broadcast-name{font-size:.7rem}.player-tools{padding:11px;gap:7px}.tool{padding:10px;font-size:.72rem}.tool.secondary{margin-left:0}.grid{grid-template-columns:1fr}.panel{padding:17px}.sections{margin-top:21px}.tags span{font-size:.69rem;padding:8px 11px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
-<div class="urban-bg" aria-hidden="true"></div><div class="glow cyan" aria-hidden="true"></div><div class="glow red" aria-hidden="true"></div>
-<main class="page">
-  <img class="brand" src="assets/coyotv-logo.jpg" alt="Logotipo oficial de Coyotv">
-  <p class="eyebrow">Tu canal · Tu barrio · Tu voz</p>
-  <h1>¡Bienvenidos a <span>Coyotv!</span></h1>
-  <p class="intro">Desde Neza, para todo el Oriente. Información, entretenimiento y la voz de nuestro barrio.</p>
-  <section class="player-shell" aria-label="Reproductor de Coyotv">
-    <div class="player">
-      <div class="video-wrap">
-        <div id="yt-player"></div>
-        <div class="placeholder" id="placeholder"><strong><span class="live-dot"></span>COYOTV</strong><span class="eyebrow">Transmisión en vivo</span></div>
+<div class="bg" aria-hidden="true"></div>
+<div class="wrapper">
+ <header class="header">
+   <a href="./" aria-label="Inicio de Coyotv"><img class="brand" src="assets/coyotv-logo.jpg" alt="Logotipo original de Coyotv"></a>
+   <div class="header-right"><span class="header-tag">La voz de nuestro barrio</span><a class="pill" href="https://www.youtube.com/@coyotv712" target="_blank" rel="noopener noreferrer">Canal de YouTube ↗</a></div>
+ </header>
+ <main>
+   <section class="hero" aria-labelledby="headline">
+     <p class="kicker">Televisión digital · Ciudad Nezahualcóyotl</p>
+     <h1 id="headline">¡Bienvenidos a <span>COYOTV!</span></h1>
+     <p class="subhead">Desde Neza, para todo el Oriente. Información, entretenimiento y la voz de nuestro barrio.</p>
+   </section>
+   <section class="broadcast" aria-label="Reproductor de televisión Coyotv">
+      <div class="broadcast-inner">
+        <div class="broadcast-head"><span class="broadcast-name">◉ Señal Coyotv</span><span class="indicator"><span class="dot" aria-hidden="true"></span><span id="broadcast-mode">Transmisión anterior</span></span></div>
+        <div class="video" id="video-frame">
+          <iframe id="youtube-frame" title="Video de Coyotv en YouTube" src="https://www.youtube-nocookie.com/embed/5C5f4fnbOB0?rel=0&playsinline=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        </div>
+        <div class="player-tools" aria-label="Controles del canal">
+           <button class="tool active" id="replay" type="button" aria-pressed="true">▶ Ver transmisión anterior</button>
+           <button class="tool" id="scheduled" type="button" aria-pressed="false">◷ Ver próximo directo</button>
+           <button class="tool secondary" id="fullscreen" type="button" title="Pantalla completa"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h7v2H5v5H3zm11 0h7v7h-2V5h-5zM3 14h2v5h5v2H3zm16 0h2v7h-7v-2h5z"/></svg> Pantalla completa</button>
+        </div>
       </div>
-      <div class="controls">
-        <button class="control-btn" id="play" aria-label="Reproducir" title="Reproducir o pausar">
-          <svg id="play-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
-        </button>
-        <span class="control-label" id="play-label">En vivo</span>
-        <span class="spacer"></span>
-        <svg class="volume-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 4V5L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4.03v8.05A4.5 4.5 0 0 0 16.5 12zm-2.5-9v2.06a7 7 0 0 1 0 13.88V21a9 9 0 0 0 0-18z"/></svg>
-        <input id="volume" type="range" min="0" max="100" value="75" aria-label="Volumen">
-      </div>
-    </div>
-  </section>
-  <p class="status" id="status" role="status">Listos para transmitir desde Neza.</p>
-  <nav class="footer" aria-label="Áreas de Coyotv"><span>Noticias</span><span>Gaming</span><span>Música</span><span>Radio</span><span>Comunidad</span></nav>
-  <p class="smallprint">Coyotv · Desde Neza, para todo el Oriente</p>
-</main>
+   </section>
+   <p class="status" id="status" role="status">Pulsa ▶ dentro del video para reproducir. El volumen se controla desde YouTube.</p>
+   <div class="grid">
+      <section class="panel" aria-labelledby="panel-a"><h2 id="panel-a">📺 Tu pantalla desde Neza</h2><p>En esta primera prueba puedes ver una transmisión que ya realizamos. Cuando comience el siguiente directo, utiliza el botón <b>«Ver próximo directo»</b> para acceder a la señal programada.</p><a class="text-link" id="video-link" href="https://www.youtube.com/watch?v=5C5f4fnbOB0" target="_blank" rel="noopener noreferrer">Abrir este video directamente en YouTube ↗</a></section>
+      <section class="panel" aria-labelledby="panel-b"><h2 id="panel-b">🐺 Esto apenas comienza</h2><p>Coyotv reúne información local, programas, entretenimiento y propuestas hechas con la voz y el espíritu de nuestro barrio. Pronto tendremos más secciones.</p></section>
+   </div>
+   <div class="sections"><div class="sections-heading">Universo Coyotv</div><div class="tags" aria-label="Categorías de Coyotv"><span>Los Corresponsables</span><span>Coyotv Gaming</span><span>Comunidad</span><span>Entretenimiento</span><span>BarrioFonia Radio</span></div></div>
+ </main>
+ <footer class="footer"><b>COYOTV</b> · Desde Neza, para todo el Oriente · © <span id="year">2026</span></footer>
+</div>
 <script>
-/* CONFIGURACIÓN RÁPIDA: pega aquí el ID del video o directo de YouTube.
-   Ejemplo de URL: https://www.youtube.com/watch?v=AbCdEf12345
-   El ID sería: AbCdEf12345
-   En YouTube Studio, el directo debe estar iniciado o programado para poder reproducirse. */
-const YOUTUBE_VIDEO_ID = "PEGA_AQUI_EL_ID_DEL_DIRECTO";
-let player, ready = false, playing = false;
-const statusEl = document.getElementById("status");
-const placeholder = document.getElementById("placeholder");
-const playButton = document.getElementById("play");
-const playIcon = document.getElementById("play-icon");
-const playLabel = document.getElementById("play-label");
-const volume = document.getElementById("volume");
-
-function setPlayIcon(isPlaying){
-  playing = isPlaying;
-  playIcon.innerHTML = isPlaying
-    ? '<path d="M6 5h4v14H6zm8 0h4v14h-4z"/>'
-    : '<path d="M8 5v14l11-7z"/>';
-  playButton.setAttribute("aria-label", isPlaying ? "Pausar" : "Reproducir");
-  playLabel.textContent = isPlaying ? "Reproduciendo" : "En vivo";
+/* COYOTV — CONFIGURACIÓN FÁCIL
+   Si cambia la transmisión, modifica SOLO los identificadores de YouTube:
+   https://www.youtube.com/watch?v=IDENTIFICADOR
+   No pegues aquí el enlace completo, únicamente sus 11 caracteres de ID.
+*/
+const COYOTV = {
+  repeticion: "5C5f4fnbOB0",          // transmisión que ya se realizó
+  proximoDirecto: "_ycMTJ_uBFA"       // transmisión programada
+};
+const iframe = document.getElementById('youtube-frame');
+const mode = document.getElementById('broadcast-mode');
+const status = document.getElementById('status');
+const videoLink = document.getElementById('video-link');
+const replay = document.getElementById('replay');
+const scheduled = document.getElementById('scheduled');
+function changeVideo(id,scheduledMode){
+  if (!/^[\w-]{11}$/.test(id)) {status.textContent='El identificador de YouTube no es válido.';return;}
+  iframe.src='https://www.youtube-nocookie.com/embed/'+encodeURIComponent(id)+'?rel=0&playsinline=1';
+  videoLink.href='https://www.youtube.com/watch?v='+encodeURIComponent(id);
+  mode.textContent=scheduledMode?'Directo programado':'Transmisión anterior';
+  replay.classList.toggle('active',!scheduledMode);
+  scheduled.classList.toggle('active',scheduledMode);
+  replay.setAttribute('aria-pressed',String(!scheduledMode));
+  scheduled.setAttribute('aria-pressed',String(scheduledMode));
+  status.textContent=scheduledMode?'Si el directo aún no comienza, YouTube puede mostrar una espera o no permitir reproducirlo.':'Pulsa ▶ dentro del video para reproducir. El volumen se controla desde YouTube.';
 }
-function onYouTubeIframeAPIReady(){
-  if(!YOUTUBE_VIDEO_ID || YOUTUBE_VIDEO_ID.includes("PEGA_AQUI")){
-    statusEl.textContent = "Falta configurar el ID del directo de YouTube. Consulta LEEME.txt.";
-    return;
-  }
-  player = new YT.Player("yt-player", {
-    videoId: YOUTUBE_VIDEO_ID,
-    playerVars: {autoplay:0, controls:0, disablekb:1, fs:0, iv_load_policy:3, modestbranding:1, playsinline:1, rel:0},
-    events:{
-      onReady: function(event){ready=true;event.target.setVolume(Number(volume.value));statusEl.textContent="Coyotv está listo para reproducir.";},
-      onStateChange: function(event){
-        if(event.data===YT.PlayerState.PLAYING){setPlayIcon(true);placeholder.style.display="none";statusEl.textContent="Estás viendo Coyotv.";}
-        else if(event.data===YT.PlayerState.PAUSED){setPlayIcon(false);statusEl.textContent="Transmisión pausada.";}
-        else if(event.data===YT.PlayerState.ENDED){setPlayIcon(false);statusEl.textContent="La transmisión ha terminado.";}
-      },
-      onError: function(){statusEl.textContent="No se pudo cargar el video. Revisa el ID y que la inserción esté permitida.";placeholder.style.display="flex";}
-    }
-  });
-}
-playButton.addEventListener("click",()=>{
-  if(!ready || !player){statusEl.textContent="Configura primero el ID del directo en el archivo index.html.";return;}
-  if(playing) player.pauseVideo(); else {player.unMute();player.playVideo();}
+replay.addEventListener('click',()=>changeVideo(COYOTV.repeticion,false));
+scheduled.addEventListener('click',()=>changeVideo(COYOTV.proximoDirecto,true));
+document.getElementById('fullscreen').addEventListener('click',()=>{
+  const el=document.getElementById('video-frame');
+  if(document.fullscreenElement){document.exitFullscreen().catch(()=>{});return;}
+  if(el.requestFullscreen){el.requestFullscreen().catch(()=>{status.textContent='Tu navegador no permitió ampliar la pantalla. Usa el botón de pantalla completa del video.';});}
+  else{status.textContent='Usa el botón de pantalla completa del reproductor de YouTube.';}
 });
-volume.addEventListener("input",()=>{
-  if(ready && player){player.setVolume(Number(volume.value));if(Number(volume.value)===0)player.mute();else player.unMute();}
-});
-const tag=document.createElement("script");tag.src="https://www.youtube.com/iframe_api";document.head.appendChild(tag);
+document.getElementById('year').textContent=new Date().getFullYear();
 </script>
 </body>
 </html>
