@@ -81,10 +81,7 @@ let preferRecorded = false;
 let misses = 0;
 let checking = false;
 function show(modeWanted) {
-  if (mode === modeWanted) {
-    if (modeWanted === 'recorded') label.textContent = 'TRANSMISIÓN ANTERIOR';
-    return;
-  }
+  if (mode === modeWanted) return;
   mode = modeWanted;
   const enVivo = modeWanted === 'live';
   player.src = enVivo ? LIVE_PAGE : RECORDED;
@@ -94,14 +91,18 @@ function show(modeWanted) {
   label.textContent = enVivo ? '● EN VIVO' : 'TRANSMISIÓN ANTERIOR';
   status.textContent = enVivo
     ? 'Señal de COYOTV disponible. Pulsa reproducir para ver y escuchar.'
-    : 'Cuando no estamos en vivo, disfruta una transmisión anterior de COYOTV.';
+    : 'Mientras no hay señal en vivo, disfruta una transmisión anterior de COYOTV.';
 }
 async function checkLive() {
   const ctrl = new AbortController();
   const timeout = setTimeout(() => ctrl.abort(), 7000);
   try {
     const response = await fetch(LIVE_MANIFEST, {cache:'no-store', signal:ctrl.signal});
-    return response.ok;
+    if (!response.ok) return false;
+    const manifest = await response.text();
+    // Acepta listas HLS de variantes y listas de segmentos; no basta un HTTP 200.
+    return manifest.trimStart().startsWith('#EXTM3U') &&
+      (manifest.includes('#EXT-X-STREAM-INF') || manifest.includes('#EXTINF:'));
   } catch (_) { return false; }
   finally { clearTimeout(timeout); }
 }
@@ -119,8 +120,9 @@ async function refreshLive() {
       misses++;
       if (misses >= 2 || mode === '') {
         online = false;
-        preferRecorded = false;
+        // No olvidar la elección manual del espectador.
         show('recorded');
+        label.textContent = 'TRANSMISIÓN ANTERIOR';
       }
     }
   } finally { checking = false; }
@@ -130,10 +132,29 @@ prev.addEventListener('click', () => {
   show('recorded');
   if (online) label.textContent = 'EN VIVO DISPONIBLE';
 });
-live.addEventListener('click', () => {
-  preferRecorded = false;
-  show('live');
-  if (!online) status.textContent = 'Intentando conectar a la señal en vivo…';
+live.addEventListener('click', async () => {
+  if (checking) {
+    status.textContent = 'Comprobando señal. Inténtalo en unos segundos.';
+    return;
+  }
+  checking = true;
+  status.textContent = 'Comprobando la transmisión en vivo…';
+  try {
+    const available = await checkLive();
+    online = available;
+    if (available) {
+      misses = 0;
+      preferRecorded = false;
+      show('live');
+      label.textContent = '● EN VIVO';
+      status.textContent = 'Señal de COYOTV disponible. Pulsa reproducir para ver y escuchar.';
+    } else {
+      preferRecorded = true;
+      show('recorded');
+      label.textContent = 'TRANSMISIÓN ANTERIOR';
+      status.textContent = 'Por ahora no hay transmisión en vivo. Seguimos con contenido grabado.';
+    }
+  } finally { checking = false; }
 });
 document.getElementById('full').addEventListener('click', () => {
   const el = document.querySelector('.videobox');
