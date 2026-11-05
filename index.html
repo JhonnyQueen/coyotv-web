@@ -28,23 +28,7 @@
   height: 100vh;
   aspect-ratio: auto;
   background: black;
-}
-/* COYOTV v2 — controles visibles para el directo */
-.videobox #live-video { position:absolute; inset:0; width:100%; height:100%; object-fit:contain; background:#000; }
-#player[hidden], #live-video[hidden], #live-start[hidden], #exit-full[hidden] { display:none!important; }
-#live-start { position:absolute; inset:0; z-index:3; width:100%; height:100%; border:0; color:white; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; cursor:pointer; background:radial-gradient(circle at center,#152c42bb,#01040ce6 75%); text-shadow:0 2px 8px #000; }
-#live-start .live-start-circle { display:grid; place-items:center; width:clamp(74px,11vw,112px); height:clamp(74px,11vw,112px); border-radius:999px; background:linear-gradient(135deg,#ff3a55,#b50929); border:3px solid #ffffffb5; box-shadow:0 7px 30px #000c,0 0 28px #f12e5288; font-size:clamp(34px,5vw,51px); padding-left:5px; transition:transform .18s; }
-#live-start:hover .live-start-circle,#live-start:focus-visible .live-start-circle { transform:scale(1.07); }
-#live-start strong { font-size:clamp(1.07rem,2.7vw,1.7rem); letter-spacing:.06em; }
-#live-start small { font-size:clamp(.76rem,1.7vw,.97rem); color:#b8e9f1; }
-#exit-full { position:absolute; z-index:5; top:12px; right:12px; color:white; background:#091825e8; padding:12px 16px; border:1px solid #9ce4ef; border-radius:10px; font-weight:850; cursor:pointer; }
-.livebox:not(:fullscreen) #exit-full { display:none!important; }
-.livebox:fullscreen .topbar { flex-shrink:0; }
-.livebox:fullscreen .videobox { flex:1; min-height:0; aspect-ratio:auto; }
-.livebox:fullscreen .controls { display:flex; flex-shrink:0; }
-@media(max-width:550px) { #exit-full { top:6px;right:6px;padding:10px 12px;font-size:.82rem;} .livebox:fullscreen .controls{padding:7px;} }
-
-</style><script defer src="https://cdn.jsdelivr.net/npm/hls.js@1.7.3/dist/hls.min.js"></script></head><body><div class="backdrop" aria-hidden="true"></div><div class="ambient" aria-hidden="true"></div><div class="scan" aria-hidden="true"></div><div class="shell"><header class="header"><a href="./" aria-label="Inicio"><img class="brand" src="assets/coyotv-logo.png" alt="Logotipo oficial de Coyotv"></a><div class="headcopy">COYOTV · TELEVISIÓN DIGITAL<br>DESDE NEZA PARA EL MUNDO</div></header><main><section class="hero"><div class="history" aria-hidden="true"></div><p class="kicker">NUESTRA GENTE · NUESTRA VOZ</p><h1>DESDE <em>NEZA</em> PARA EL <strong>MUNDO</strong></h1><p class="lead">Información, entretenimiento y la voz de nuestra comunidad.</p></section><section class="liveframe" aria-label="Señal de Coyotv"><div class="livebox"><div class="topbar"><span class="air"><i></i> SEÑAL COYOTV</span><span class="badge" id="air-label">COMPROBANDO SEÑAL</span></div><div class="videobox" id="videobox"><iframe id="player" title="Grabación anterior de COYOTV" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="eager" hidden></iframe><video id="live-video" controls playsinline preload="none" aria-label="Transmisión en vivo de COYOTV" hidden></video><button id="live-start" type="button" aria-label="Reproducir COYOTV en vivo" hidden><span class="live-start-circle" aria-hidden="true">▶</span><strong>REPRODUCIR EN VIVO</strong><small>Ver y escuchar COYOTV</small></button><button id="exit-full" type="button" hidden>↙ Regresar</button></div><div class="controls"><button class="btn" id="prev" aria-pressed="true" type="button">▶ Transmisión anterior</button><button class="btn red" id="live" aria-pressed="false" type="button">● Ver en vivo</button><button class="btn push" id="full" type="button">⛶ Pantalla completa</button></div></div></section><p class="status" id="status">Comprobando la señal en vivo de COYOTV…</p><section class="area"><h2>NUESTRO <span>UNIVERSO</span></h2><p>Programas y proyectos desde Neza, para nuestra gente.</p><div class="programs"><article class="program cor"><div><h3>Los Corresponsables</h3><p>Noticias, comunidad y servicio</p></div></article><article class="program game"><div><h3>Coyotv Gaming</h3><p>Videojuegos, torneos y más</p></div></article><article class="program radio"><div><h3>BarrioFonia Radio</h3><p>Música, conversación y barrio</p></div></article><a class="program food" href="#comedor" aria-label="Ver menú del Comedor Humanitario Coyotv"><div><h3>Comedor Humanitario Coyotv</h3><p>Menú del día · Sazón oaxaqueño</p></div></a><article class="program com"><div><h3>Comunidad</h3><p>Nuestra gente y sus historias</p></div></article></div></section><section class="area" id="comedor" aria-labelledby="comedor-title"><h2 id="comedor-title">COMEDOR <span>HUMANITARIO COYOTV</span></h2><p>De Neza, con Sazón Oaxaqueño · Menú diario y novedades.</p><div class="comedor-grid"><div class="comedor-card"><h3>🍽️ Menú del día</h3><div class="menu-art"><a href="assets/menu.png" target="_blank" rel="noopener" aria-label="Ampliar menú del día"><img id="menu-img" src="assets/menu.png" alt="Menú vigente del Comedor Humanitario Coyotv. Toca para ampliar." loading="eager"></a></div><p class="comedor-note">El menú puede variar; confirma disponibilidad y precios directamente con el comedor.</p></div><div class="comedor-card"><h3>El comedor y sus novedades</h3><p class="comedor-desc">Comida con sabor oaxaqueño y atención de barrio. Consulta nuestro menú y entérate de nuestras actividades, promociones y noticias.</p><p class="comedor-desc">📍 Calle Óscar 200, colonia Pavón, entre Juárez y Virginia, Ciudad Nezahualcóyotl.</p><p class="comedor-desc">🕘 Lunes a sábado, de 9:00 a 17:00 h.</p><div class="comedor-contact"><a href="tel:+525654499847">☎ 56 5449 9847 </a><a href="https://wa.me/525658262130" target="_blank" rel="noopener noreferrer">WhatsApp del comedor ↗</a></div><div class="comedor-media" id="comedor-extra" hidden><h3>📸 Novedades del comedor</h3><img id="comedor-extra-img" src="assets/extra.jpg" alt="Actividad o promoción del Comedor Humanitario Coyotv" loading="eager"></div><div class="comedor-media" id="comedor-video-zone" hidden><h3>🎬 Video del comedor</h3><video id="comedor-video" controls preload="none" playsinline aria-label="Video del Comedor Humanitario Coyotv"></video></div><p class="comedor-note">Las imágenes son informativas y se actualizan cuando hay nuevo material.</p></div></div></section><section class="area"><h2>ALIADOS DE <span>COYOTV</span></h2><p>Empresas y personas que hacen posible este proyecto.</p><div class="sponsors"><div><h3>Tu negocio también puede estar aquí</h3><p>En este espacio destacaremos a nuestros aliados con un video promocional renovado cada mes, junto con sus historias, servicios y aportaciones a nuestra comunidad.</p><p>¿Te interesa patrocinar Coyotv? Escríbenos y construyamos una propuesta juntos. Actualizaremos el video de aliados cada mes.</p><a class="btn" href="https://wa.me/5215573129006?text=Hola%2C%20quiero%20informaci%C3%B3n%20para%20patrocinar%20Coyotv" target="_blank" rel="noopener noreferrer">Contactar para patrocinios ↗</a></div><div class="sponsor-video" id="sponsor-container"><div id="sponsor-placeholder"><div style="font-size:2.2rem" aria-hidden="true">▶</div><h3>Aliados del mes</h3><p>Próximamente: nuestro video mensual de patrocinadores.</p><span style="font-size:.73rem;margin-top:8px;color:#bfd2df">Espacio disponible · Escríbenos para participar</span></div></div></div></section><section class="area"><h2>SÍGUENOS Y <span>CONÉCTATE</span></h2><p>Somos más que un canal, somos una comunidad.</p><div class="socials"><a href="https://www.facebook.com/coyotv1" target="_blank" rel="noopener noreferrer"><b class="facebook">f Facebook</b><span>@coyotv1</span></a><a href="https://www.youtube.com/@coyotv712" target="_blank" rel="noopener noreferrer"><b class="youtube">▶ YouTube</b><span>@coyotv712</span></a><a href="https://www.tiktok.com/@coyotv1" target="_blank" rel="noopener noreferrer"><b class="tiktok">♪ TikTok</b><span>@coyotv1</span></a><a href="https://wa.me/5215573129006" target="_blank" rel="noopener noreferrer"><b class="whatsapp">✉ WhatsApp</b><span>Mensaje directo</span></a></div></section></main><footer class="footer"><strong>COYOTV</strong> · DESDE NEZA PARA EL MUNDO · <span id="year"></span></footer></div><script>
+}</style></head><body><div class="backdrop" aria-hidden="true"></div><div class="ambient" aria-hidden="true"></div><div class="scan" aria-hidden="true"></div><div class="shell"><header class="header"><a href="./" aria-label="Inicio"><img class="brand" src="assets/coyotv-logo.png" alt="Logotipo oficial de Coyotv"></a><div class="headcopy">COYOTV · TELEVISIÓN DIGITAL<br>DESDE NEZA PARA EL MUNDO</div></header><main><section class="hero"><div class="history" aria-hidden="true"></div><p class="kicker">NUESTRA GENTE · NUESTRA VOZ</p><h1>DESDE <em>NEZA</em> PARA EL <strong>MUNDO</strong></h1><p class="lead">Información, entretenimiento y la voz de nuestra comunidad.</p></section><section class="liveframe" aria-label="Señal de Coyotv"><div class="livebox"><div class="topbar"><span class="air"><i></i> SEÑAL COYOTV</span><span class="badge" id="air-label">COMPROBANDO SEÑAL</span></div><div class="videobox" id="videobox"><iframe id="player" title="Coyotv en YouTube" src="https://www.youtube-nocookie.com/embed/5C5f4fnbOB0?rel=0&playsinline=1" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="eager"></iframe></div><div class="controls"><button class="btn" id="prev" aria-pressed="true" type="button">▶ Transmisión anterior</button><button class="btn red" id="live" aria-pressed="false" type="button">● Ver en vivo</button><button class="btn push" id="full" type="button">⛶ Pantalla completa</button></div></div></section><p class="status" id="status">Comprobando la señal en vivo de COYOTV…</p><section class="area"><h2>NUESTRO <span>UNIVERSO</span></h2><p>Programas y proyectos desde Neza, para nuestra gente.</p><div class="programs"><article class="program cor"><div><h3>Los Corresponsables</h3><p>Noticias, comunidad y servicio</p></div></article><article class="program game"><div><h3>Coyotv Gaming</h3><p>Videojuegos, torneos y más</p></div></article><article class="program radio"><div><h3>BarrioFonia Radio</h3><p>Música, conversación y barrio</p></div></article><a class="program food" href="#comedor" aria-label="Ver menú del Comedor Humanitario Coyotv"><div><h3>Comedor Humanitario Coyotv</h3><p>Menú del día · Sazón oaxaqueño</p></div></a><article class="program com"><div><h3>Comunidad</h3><p>Nuestra gente y sus historias</p></div></article></div></section><section class="area" id="comedor" aria-labelledby="comedor-title"><h2 id="comedor-title">COMEDOR <span>HUMANITARIO COYOTV</span></h2><p>De Neza, con Sazón Oaxaqueño · Menú diario y novedades.</p><div class="comedor-grid"><div class="comedor-card"><h3>🍽️ Menú del día</h3><div class="menu-art"><a href="assets/menu.png" target="_blank" rel="noopener" aria-label="Ampliar menú del día"><img id="menu-img" src="assets/menu.png" alt="Menú vigente del Comedor Humanitario Coyotv. Toca para ampliar." loading="eager"></a></div><p class="comedor-note">El menú puede variar; confirma disponibilidad y precios directamente con el comedor.</p></div><div class="comedor-card"><h3>El comedor y sus novedades</h3><p class="comedor-desc">Comida con sabor oaxaqueño y atención de barrio. Consulta nuestro menú y entérate de nuestras actividades, promociones y noticias.</p><p class="comedor-desc">📍 Calle Óscar 200, colonia Pavón, entre Juárez y Virginia, Ciudad Nezahualcóyotl.</p><p class="comedor-desc">🕘 Lunes a sábado, de 9:00 a 17:00 h.</p><div class="comedor-contact"><a href="tel:+525654499847">☎ 56 5449 9847 </a><a href="https://wa.me/525658262130" target="_blank" rel="noopener noreferrer">WhatsApp del comedor ↗</a></div><div class="comedor-media" id="comedor-extra" hidden><h3>📸 Novedades del comedor</h3><img id="comedor-extra-img" src="assets/extra.jpg" alt="Actividad o promoción del Comedor Humanitario Coyotv" loading="eager"></div><div class="comedor-media" id="comedor-video-zone" hidden><h3>🎬 Video del comedor</h3><video id="comedor-video" controls preload="none" playsinline aria-label="Video del Comedor Humanitario Coyotv"></video></div><p class="comedor-note">Las imágenes son informativas y se actualizan cuando hay nuevo material.</p></div></div></section><section class="area"><h2>ALIADOS DE <span>COYOTV</span></h2><p>Empresas y personas que hacen posible este proyecto.</p><div class="sponsors"><div><h3>Tu negocio también puede estar aquí</h3><p>En este espacio destacaremos a nuestros aliados con un video promocional renovado cada mes, junto con sus historias, servicios y aportaciones a nuestra comunidad.</p><p>¿Te interesa patrocinar Coyotv? Escríbenos y construyamos una propuesta juntos. Actualizaremos el video de aliados cada mes.</p><a class="btn" href="https://wa.me/5215573129006?text=Hola%2C%20quiero%20informaci%C3%B3n%20para%20patrocinar%20Coyotv" target="_blank" rel="noopener noreferrer">Contactar para patrocinios ↗</a></div><div class="sponsor-video" id="sponsor-container"><div id="sponsor-placeholder"><div style="font-size:2.2rem" aria-hidden="true">▶</div><h3>Aliados del mes</h3><p>Próximamente: nuestro video mensual de patrocinadores.</p><span style="font-size:.73rem;margin-top:8px;color:#bfd2df">Espacio disponible · Escríbenos para participar</span></div></div></div></section><section class="area"><h2>SÍGUENOS Y <span>CONÉCTATE</span></h2><p>Somos más que un canal, somos una comunidad.</p><div class="socials"><a href="https://www.facebook.com/coyotv1" target="_blank" rel="noopener noreferrer"><b class="facebook">f Facebook</b><span>@coyotv1</span></a><a href="https://www.youtube.com/@coyotv712" target="_blank" rel="noopener noreferrer"><b class="youtube">▶ YouTube</b><span>@coyotv712</span></a><a href="https://www.tiktok.com/@coyotv1" target="_blank" rel="noopener noreferrer"><b class="tiktok">♪ TikTok</b><span>@coyotv1</span></a><a href="https://wa.me/5215573129006" target="_blank" rel="noopener noreferrer"><b class="whatsapp">✉ WhatsApp</b><span>Mensaje directo</span></a></div></section></main><footer class="footer"><strong>COYOTV</strong> · DESDE NEZA PARA EL MUNDO · <span id="year"></span></footer></div><script>
 
 // PUBLICACIÓN DEL COMEDOR — Solo sustituye los archivos en assets/.
 // El menú conserva su nombre: menu.png
@@ -82,18 +66,13 @@ if (/^[A-Za-z0-9_-]{11}$/.test(VIDEO_PATROCINADORES_ID)) {
   sponsorFrame.loading = 'lazy';
   sponsor.replaceChildren(sponsorFrame);
 }
-// COYOTV: reproductor HLS con botón grande y salida de pantalla completa.
-const LIVE_PAGE = 'https://live.coyotv.online/coyotv/main?autoplay=true&muted=false&playsinline=true';
+// COYOTV: señal directa desde VPS con respaldo de YouTube.
+const LIVE_PAGE = 'https://live.coyotv.online/coyotv/main?autoplay=false&muted=false&playsinline=true';
 const LIVE_MANIFEST = 'https://live.coyotv.online/coyotv/main/index.m3u8';
 const RECORDED = 'https://www.youtube-nocookie.com/embed/5C5f4fnbOB0?rel=0&playsinline=1';
 const player = document.getElementById('player');
-const liveVideo = document.getElementById('live-video');
-const playOverlay = document.getElementById('live-start');
-const exitFull = document.getElementById('exit-full');
 const prev = document.getElementById('prev');
 const live = document.getElementById('live');
-const fullButton = document.getElementById('full');
-const fullBox = document.querySelector('.livebox');
 const status = document.getElementById('status');
 const label = document.getElementById('air-label');
 let mode = '';
@@ -101,95 +80,22 @@ let online = false;
 let preferRecorded = false;
 let misses = 0;
 let checking = false;
-let hls = null;
-let liveStarted = false;
-
-function stopLive() {
-  liveStarted = false;
-  liveVideo.pause();
-  if (hls) { hls.destroy(); hls = null; }
-  liveVideo.removeAttribute('src');
-  liveVideo.load();
-  liveVideo.hidden = true;
-  playOverlay.hidden = true;
-}
 function show(modeWanted) {
-  if (mode === modeWanted) return;
-  if (mode === 'live') stopLive();
-  mode = modeWanted;
-  const isLive = mode === 'live';
-  prev.setAttribute('aria-pressed', String(!isLive));
-  live.setAttribute('aria-pressed', String(isLive));
-  label.textContent = isLive ? '● EN VIVO' : 'TRANSMISIÓN ANTERIOR';
-  if (isLive) {
-    player.hidden = true;
-    player.removeAttribute('src');
-    liveVideo.hidden = true;
-    playOverlay.hidden = false;
-    status.textContent = 'Pulsa el botón grande para ver y escuchar COYOTV.';
-  } else {
-    liveVideo.hidden = true;
-    playOverlay.hidden = true;
-    player.hidden = false;
-    player.src = RECORDED;
-    player.title = 'Transmisión anterior de COYOTV';
-    status.textContent = 'Cuando no hay directo, disfruta una transmisión anterior de COYOTV.';
-  }
-}
-function fallbackIframe() {
-  liveVideo.hidden = true;
-  player.hidden = false;
-  player.title = 'COYOTV en vivo';
-  player.src = LIVE_PAGE;
-  status.textContent = 'Si el navegador no inicia el video, pulsa reproducir dentro del reproductor.';
-}
-function playbackBlocked() {
-  if (mode !== 'live') return;
-  status.textContent = 'Pulsa el botón de reproducir para iniciar el sonido y la imagen.';
-  playOverlay.hidden = false;
-  playOverlay.querySelector('strong').textContent = '▶ INICIAR REPRODUCCIÓN';
-}
-function startLive() {
-  if (mode !== 'live') show('live');
-  playOverlay.hidden = true;
-  player.hidden = true;
-  liveVideo.hidden = false;
-  liveVideo.muted = false;
-  liveVideo.autoplay = true;
-  if (liveStarted) {
-    liveVideo.play().catch(playbackBlocked);
+  if (mode === modeWanted) {
+    if (modeWanted === 'recorded') label.textContent = 'TRANSMISIÓN ANTERIOR';
     return;
   }
-  liveStarted = true;
-  status.textContent = 'Conectando con la señal en vivo de COYOTV…';
-  if (liveVideo.canPlayType('application/vnd.apple.mpegurl')) {
-    liveVideo.src = LIVE_MANIFEST;
-    liveVideo.play().catch(playbackBlocked);
-  } else if (window.Hls && Hls.isSupported()) {
-    hls = new Hls({lowLatencyMode:true, backBufferLength:30});
-    hls.attachMedia(liveVideo);
-    hls.on(Hls.Events.MEDIA_ATTACHED, () => { hls.loadSource(LIVE_MANIFEST); });
-    hls.on(Hls.Events.MANIFEST_PARSED, () => { liveVideo.play().catch(playbackBlocked); });
-    hls.on(Hls.Events.ERROR, (_event, data) => {
-      if (data.fatal && mode === 'live') {
-        status.textContent = 'Se interrumpió la señal. Puedes intentarlo otra vez.';
-        stopLive();
-        playOverlay.hidden = false;
-      }
-    });
-  } else {
-    fallbackIframe(); // Navegador antiguo o biblioteca no disponible.
-  }
+  mode = modeWanted;
+  const enVivo = modeWanted === 'live';
+  player.src = enVivo ? LIVE_PAGE : RECORDED;
+  player.title = enVivo ? 'COYOTV en vivo' : 'Grabación anterior de COYOTV';
+  prev.setAttribute('aria-pressed', String(!enVivo));
+  live.setAttribute('aria-pressed', String(enVivo));
+  label.textContent = enVivo ? '● EN VIVO' : 'TRANSMISIÓN ANTERIOR';
+  status.textContent = enVivo
+    ? 'Señal de COYOTV disponible. Pulsa reproducir para ver y escuchar.'
+    : 'Cuando no estamos en vivo, disfruta una transmisión anterior de COYOTV.';
 }
-liveVideo.addEventListener('playing', () => {
-  playOverlay.hidden = true;
-  if (mode === 'live') status.textContent = 'Estás viendo COYOTV en vivo.';
-});
-liveVideo.addEventListener('play', () => {
-  if (hls && Number.isFinite(hls.liveSyncPosition) && liveVideo.seekable.length) {
-    try { liveVideo.currentTime = hls.liveSyncPosition; } catch (_) {}
-  }
-});
 async function checkLive() {
   const ctrl = new AbortController();
   const timeout = setTimeout(() => ctrl.abort(), 7000);
@@ -227,31 +133,15 @@ prev.addEventListener('click', () => {
 live.addEventListener('click', () => {
   preferRecorded = false;
   show('live');
-  startLive();
+  if (!online) status.textContent = 'Intentando conectar a la señal en vivo…';
 });
-playOverlay.addEventListener('click', startLive);
-async function toggleFullscreen() {
-  try {
-    if (document.fullscreenElement) {
-      await document.exitFullscreen();
-    } else if (fullBox.requestFullscreen) {
-      await fullBox.requestFullscreen();
-    } else {
-      status.textContent = 'Utiliza la opción de pantalla completa del reproductor.';
-    }
-  } catch (_) {
-    status.textContent = 'Tu navegador no permitió este modo. Usa el botón del video.';
-  }
-}
-function updateFullscreenButtons() {
-  const expanded = document.fullscreenElement === fullBox;
-  fullButton.textContent = expanded ? '↙ Regresar' : '⛶ Pantalla completa';
-  fullButton.setAttribute('aria-label', expanded ? 'Salir de pantalla completa' : 'Entrar a pantalla completa');
-  exitFull.hidden = !expanded;
-}
-fullButton.addEventListener('click', toggleFullscreen);
-exitFull.addEventListener('click', toggleFullscreen);
-document.addEventListener('fullscreenchange', updateFullscreenButtons);
+document.getElementById('full').addEventListener('click', () => {
+  const el = document.querySelector('.videobox');
+  if (document.fullscreenElement) { document.exitFullscreen?.(); return; }
+  if (el.requestFullscreen) el.requestFullscreen().catch(() => {
+    status.textContent = 'Utiliza el botón de pantalla completa del reproductor.';
+  });
+});
 document.getElementById('year').textContent = new Date().getFullYear();
 refreshLive();
 setInterval(refreshLive, 30000);
