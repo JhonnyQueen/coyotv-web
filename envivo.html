@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#070b14">
+  <meta name="description" content="COYOTV en vivo. Desde Neza para el Mundo.">
+  <title>COYOTV | En vivo</title>
+  <style>
+    :root { color-scheme:dark; --cyan:#1bd8ed; --red:#ff3658; --ink:#070b14; }
+    * { box-sizing: border-box; }
+    body { margin:0; min-height:100svh; color:#eff9fc; background:linear-gradient(100deg,#050a16e8,#040714dd),url('assets/neza-noche.webp') center / cover fixed; font-family:system-ui,-apple-system,'Segoe UI',Arial,sans-serif; }
+    .container { max-width:1100px; margin:auto; padding:18px clamp(14px,3vw,28px) 35px; }
+    header { display:flex; align-items:center; justify-content:space-between; gap:15px; padding-bottom:15px; border-bottom:1px solid #ffffff35; }
+    .logo { width:clamp(130px,19vw,205px); max-height:100px; object-fit:contain; }
+    .tagline { text-align:right; font-size:clamp(.61rem,1.6vw,.86rem); letter-spacing:.12em; font-weight:800; }
+    h1 { font-size:clamp(1.9rem,5vw,3.5rem); line-height:1.08; text-align:center; margin:25px 0 8px; }
+    h1 span { color:var(--cyan); }
+    .sub { text-align:center; color:#c6d9e4; margin:0 0 22px; font-size:.96rem; }
+    .frame { padding:3px; border-radius:19px; background:linear-gradient(115deg,var(--cyan),#172537 50%,var(--red)); box-shadow:0 18px 60px #000c; }
+    .box { background:#07101b; border-radius:16px; overflow:hidden; }
+    .bar { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px 16px; font-weight:800; font-size:.83rem; letter-spacing:.04em; }
+    .dot { display:inline-block; vertical-align:baseline; width:9px; height:9px; margin-right:8px; border-radius:50%; background:#8caab8; }
+    .dot.on { background:var(--red); box-shadow:0 0 14px var(--red); }
+    .state { color:#96e6f1; font-size:.7rem; }
+    .screen { width:100%; aspect-ratio:16/9; position:relative; background:#020407; }
+    iframe { display:block; width:100%; height:100%; border:0; }
+    .controls { padding:12px; display:flex; flex-wrap:wrap; gap:10px; }
+    button, .link { border:1px solid #3b8194; border-radius:9px; background:#122537; color:#fff; padding:11px 16px; font:700 .82rem system-ui; cursor:pointer; text-decoration:none; }
+    button[aria-pressed="true"] { background:#1d5162; border-color:var(--cyan); }
+    button:hover, .link:hover { background:#1d4154; }
+    button:focus-visible, .link:focus-visible { outline:3px solid var(--cyan); outline-offset:3px; }
+    .spacer { flex:1; }
+    #message { text-align:center; min-height:24px; color:#c5d9e3; font-size:.84rem; margin:18px 0; }
+    footer { text-align:center; margin-top:28px; font-size:.78rem; color:#c3d4dd; }
+    footer strong { color:var(--cyan); }
+    @media (max-width:530px) { .controls { gap:7px; } button, .link { padding:10px; font-size:.74rem; } }
+  </style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <a href="./" aria-label="Ir a la portada de COYOTV"><img class="logo" src="assets/coyotv-logo.png" alt="COYOTV"></a>
+    <div class="tagline">TELEVISIÓN DIGITAL<br>DESDE NEZA PARA EL MUNDO</div>
+  </header>
+  <main>
+    <h1><span>COYOTV</span> EN VIVO</h1>
+    <p class="sub">Nuestra señal, desde Neza para el Mundo.</p>
+    <div class="frame"><div class="box">
+      <div class="bar"><div><span id="dot" class="dot"></span><span id="heading">COMPROBANDO SEÑAL</span></div><span class="state" id="state">CONECTANDO</span></div>
+      <div class="screen" id="screen"><iframe id="player" title="Reproductor de COYOTV" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
+      <div class="controls">
+        <button type="button" id="live" aria-pressed="false">● Ver en vivo</button>
+        <button type="button" id="recorded" aria-pressed="false">▶ Video anterior</button>
+        <span class="spacer"></span>
+        <button type="button" id="fullscreen">⛶ Pantalla completa</button>
+      </div>
+    </div></div>
+    <p id="message" role="status" aria-live="polite">Buscando la transmisión en vivo…</p>
+    <div style="text-align:center"><a class="link" href="./">← Volver a la portada</a></div>
+  </main>
+  <footer><strong>COYOTV</strong> · DESDE NEZA PARA EL MUNDO</footer>
+</div>
+<script>
+'use strict';
+const LIVE_PAGE = 'https://live.coyotv.online/coyotv/main?autoplay=false&muted=false&playsinline=true';
+const LIVE_MANIFEST = 'https://live.coyotv.online/coyotv/main/index.m3u8';
+const RECORDED = 'https://www.youtube-nocookie.com/embed/5C5f4fnbOB0?rel=0&playsinline=1';
+const player = document.getElementById('player');
+const btnLive = document.getElementById('live');
+const btnRecorded = document.getElementById('recorded');
+const state = document.getElementById('state');
+const heading = document.getElementById('heading');
+const dot = document.getElementById('dot');
+const message = document.getElementById('message');
+let online = false;
+let mode = '';
+let manualRecording = false;
+let misses = 0;
+
+function show(modeWanted) {
+  if (mode === modeWanted) return;
+  mode = modeWanted;
+  const live = mode === 'live';
+  player.src = live ? LIVE_PAGE : RECORDED;
+  player.title = live ? 'COYOTV en vivo' : 'Grabación anterior de COYOTV';
+  btnLive.setAttribute('aria-pressed', String(live));
+  btnRecorded.setAttribute('aria-pressed', String(!live));
+  heading.textContent = live ? 'COYOTV · EN VIVO' : 'COYOTV · VIDEO ANTERIOR';
+  state.textContent = live ? 'SEÑAL DISPONIBLE' : 'FUERA DEL AIRE';
+  dot.classList.toggle('on', live);
+  message.textContent = live ? 'La señal está disponible. Pulsa reproducir para ver y escuchar.' : 'No hay transmisión en vivo en este momento. Disfruta una grabación anterior.';
+}
+
+async function checkLive() {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 7000);
+  try {
+    const response = await fetch(LIVE_MANIFEST, { cache:'no-store', signal:controller.signal });
+    return response.ok;
+  } catch (_) { return false; }
+  finally { clearTimeout(timeout); }
+}
+
+async function refresh() {
+  const available = await checkLive();
+  if (available) {
+    online = true;
+    misses = 0;
+    if (!manualRecording) show('live');
+    state.textContent = mode === 'live' ? 'SEÑAL DISPONIBLE' : 'EN VIVO DISPONIBLE';
+  } else {
+    misses++;
+    if (misses >= 2 || mode === '') {
+      online = false;
+      manualRecording = false;
+      show('recorded');
+    }
+  }
+}
+
+btnLive.addEventListener('click', () => {
+  manualRecording = false;
+  show('live');
+  message.textContent = online ? 'Pulsa reproducir en el video.' : 'Intentando conectar a la señal en vivo…';
+});
+btnRecorded.addEventListener('click', () => {
+  manualRecording = true;
+  show('recorded');
+  state.textContent = online ? 'EN VIVO DISPONIBLE' : 'FUERA DEL AIRE';
+});
+document.getElementById('fullscreen').addEventListener('click', async () => {
+  const screen = document.getElementById('screen');
+  try {
+    if (document.fullscreenElement) await document.exitFullscreen();
+    else await screen.requestFullscreen();
+  } catch (_) { message.textContent = 'Utiliza el botón de pantalla completa del reproductor.'; }
+});
+
+refresh();
+setInterval(refresh, 30000);
+</script>
+</body>
+</html>
