@@ -47,98 +47,31 @@
     <h1><span>COYOTV</span> EN VIVO</h1>
     <p class="sub">Nuestra señal, desde Neza para el Mundo.</p>
     <div class="frame"><div class="box">
-      <div class="bar"><div><span id="dot" class="dot"></span><span id="heading">COMPROBANDO SEÑAL</span></div><span class="state" id="state">CONECTANDO</span></div>
-      <div class="screen" id="screen"><iframe id="player" title="Reproductor de COYOTV" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
+      <div class="bar"><div><span id="dot" class="dot"></span><span id="heading">COYOTV · SEÑAL CONTINUA</span></div><span class="state" id="state">24/7</span></div>
+      <div class="screen" id="screen"><iframe id="player" src="https://live.coyotv.online/coyotv/main?autoplay=false&amp;muted=false&amp;playsinline=true" title="COYOTV 24/7" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
       <div class="controls">
-        <button type="button" id="live" aria-pressed="false">● Ver en vivo</button>
-        <button type="button" id="recorded" aria-pressed="false">▶ Video anterior</button>
+        <a class="link" href="https://live.coyotv.online/coyotv/main" target="_blank" rel="noopener noreferrer">↗ Abrir señal</a>
         <span class="spacer"></span>
         <button type="button" id="fullscreen">⛶ Pantalla completa</button>
       </div>
     </div></div>
-    <p id="message" role="status" aria-live="polite">Buscando la transmisión en vivo…</p>
+    <p id="message" role="status" aria-live="polite">La programación continúa con los videos de respaldo del VPS cuando no hay señal del encoder.</p>
     <div style="text-align:center"><a class="link" href="./">← Volver a la portada</a></div>
   </main>
   <footer><strong>COYOTV</strong> · DESDE NEZA PARA EL MUNDO</footer>
 </div>
 <script>
 'use strict';
-const LIVE_PAGE = 'https://live.coyotv.online/coyotv/main?autoplay=false&muted=false&playsinline=true';
-const LIVE_MANIFEST = 'https://live.coyotv.online/coyotv/main/index.m3u8';
-const RECORDED = 'https://www.youtube-nocookie.com/embed/5C5f4fnbOB0?rel=0&playsinline=1';
-const player = document.getElementById('player');
-const btnLive = document.getElementById('live');
-const btnRecorded = document.getElementById('recorded');
-const state = document.getElementById('state');
-const heading = document.getElementById('heading');
-const dot = document.getElementById('dot');
-const message = document.getElementById('message');
-let online = false;
-let mode = '';
-let manualRecording = false;
-let misses = 0;
-
-function show(modeWanted) {
-  if (mode === modeWanted) return;
-  mode = modeWanted;
-  const live = mode === 'live';
-  player.src = live ? LIVE_PAGE : RECORDED;
-  player.title = live ? 'COYOTV en vivo' : 'Grabación anterior de COYOTV';
-  btnLive.setAttribute('aria-pressed', String(live));
-  btnRecorded.setAttribute('aria-pressed', String(!live));
-  heading.textContent = live ? 'COYOTV · EN VIVO' : 'COYOTV · VIDEO ANTERIOR';
-  state.textContent = live ? 'SEÑAL DISPONIBLE' : 'FUERA DEL AIRE';
-  dot.classList.toggle('on', live);
-  message.textContent = live ? 'La señal está disponible. Pulsa reproducir para ver y escuchar.' : 'No hay transmisión en vivo en este momento. Disfruta una grabación anterior.';
-}
-
-async function checkLive() {
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 7000);
-  try {
-    const response = await fetch(LIVE_MANIFEST, { cache:'no-store', signal:controller.signal });
-    return response.ok;
-  } catch (_) { return false; }
-  finally { clearTimeout(timeout); }
-}
-
-async function refresh() {
-  const available = await checkLive();
-  if (available) {
-    online = true;
-    misses = 0;
-    if (!manualRecording) show('live');
-    state.textContent = mode === 'live' ? 'SEÑAL DISPONIBLE' : 'EN VIVO DISPONIBLE';
-  } else {
-    misses++;
-    if (misses >= 2 || mode === '') {
-      online = false;
-      manualRecording = false;
-      show('recorded');
-    }
-  }
-}
-
-btnLive.addEventListener('click', () => {
-  manualRecording = false;
-  show('live');
-  message.textContent = online ? 'Pulsa reproducir en el video.' : 'Intentando conectar a la señal en vivo…';
-});
-btnRecorded.addEventListener('click', () => {
-  manualRecording = true;
-  show('recorded');
-  state.textContent = online ? 'EN VIVO DISPONIBLE' : 'FUERA DEL AIRE';
-});
+document.getElementById('dot').classList.add('on');
 document.getElementById('fullscreen').addEventListener('click', async () => {
   const screen = document.getElementById('screen');
   try {
     if (document.fullscreenElement) await document.exitFullscreen();
     else await screen.requestFullscreen();
-  } catch (_) { message.textContent = 'Utiliza el botón de pantalla completa del reproductor.'; }
+  } catch (_) {
+    document.getElementById('message').textContent = 'Utiliza el botón de pantalla completa del reproductor.';
+  }
 });
-
-refresh();
-setInterval(refresh, 30000);
 </script>
 </body>
 </html>
