@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080b14">
+<meta name="description" content="Videoteca COYOTV: entrevistas, reportajes y producciones de distintas plataformas en una sola galería.">
+<title>Videoteca | COYOTV</title>
+<link rel="icon" href="assets/coyotv-logo.png">
+<link rel="stylesheet" href="site.css?v=20261123-2">
+</head>
+<body>
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+<div class="backdrop" aria-hidden="true"></div><div class="ambient" aria-hidden="true"></div><div class="scan" aria-hidden="true"></div>
+<div class="shell">
+<header class="header">
+<a href="index.html" aria-label="COYOTV: ir al inicio"><img class="brand" src="assets/coyotv-logo.png" alt="Logotipo de COYOTV"></a>
+<div class="headcopy">COYOTV · TELEVISIÓN DIGITAL<br>DESDE NEZA PARA EL MUNDO</div>
+</header>
+<nav class="main-nav" aria-label="Menú principal"><a href="index.html">Inicio</a><a href="envivo.html">En vivo</a><a href="programas.html">Programas</a><a href="videos.html" aria-current="page">Videos</a><a href="comedor.html">Comedor</a><a href="aliados.html">Aliados</a></nav>
+<main id="contenido"><div class="cabecera-pagina"><p class="kicker">NUESTRAS PRODUCCIONES</p><h1>VIDEOS <em>COYOTV</em></h1><p>Elige una producción para verla aquí. La videoteca está separada de la televisión en vivo.</p></div><section aria-labelledby="videoteca-titulo" class="area videoteca" id="videos">
+<h2 id="videoteca-titulo">VIDEOS <span>COYOTV</span></h2>
+<p>Entrevistas, reportajes y producciones desde Neza para el mundo. Elige un video para reproducirlo aquí.</p>
+<div class="videoteca-toolbar"><input aria-label="Buscar videos" autocomplete="off" id="video-buscar" placeholder="Buscar por título o contenido…" type="search"/><select aria-label="Filtrar videos" id="video-categoria"><option value="">Todas las categorías</option></select></div>
+<div class="videoteca-visor" hidden="" id="video-visor"><div class="videoteca-visor-cabecera"><strong id="video-titulo">Video seleccionado</strong><button class="btn" id="video-cerrar" type="button">✕ Cerrar video</button></div><div class="videoteca-pantalla" id="video-pantalla"></div><div class="videoteca-ayuda">Si la plataforma no permite reproducir el video aquí, <a id="video-abrir" rel="noopener noreferrer" target="_blank">ábrelo en su sitio original</a>.</div></div>
+<div aria-live="polite" class="videoteca-grilla" id="video-grilla"></div>
+<p class="videoteca-vacio" id="video-vacio">Próximamente: nuevos videos de COYOTV.</p>
+</section></main>
+<footer class="footer"><strong>COYOTV</strong> · DESDE NEZA PARA EL MUNDO · <span id="year"></span><div class="footer-links"><a href="index.html">Inicio</a><a href="videos.html">Videos</a><a href="aliados.html">Contacto y patrocinios</a></div></footer>
+</div>
+<script src="site.js?v=20261123-2" defer></script>
+<script src="videos.js?v=20261123-2" defer></script>
+</body></html>

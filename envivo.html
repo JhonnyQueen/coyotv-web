@@ -1,77 +1,26 @@
 <!doctype html>
 <html lang="es-MX">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#070b14">
-  <meta name="description" content="COYOTV en vivo. Desde Neza para el Mundo.">
-  <title>COYOTV | En vivo</title>
-  <style>
-    :root { color-scheme:dark; --cyan:#1bd8ed; --red:#ff3658; --ink:#070b14; }
-    * { box-sizing: border-box; }
-    body { margin:0; min-height:100svh; color:#eff9fc; background:linear-gradient(100deg,#050a16e8,#040714dd),url('assets/neza-noche.webp') center / cover fixed; font-family:system-ui,-apple-system,'Segoe UI',Arial,sans-serif; }
-    .container { max-width:1100px; margin:auto; padding:18px clamp(14px,3vw,28px) 35px; }
-    header { display:flex; align-items:center; justify-content:space-between; gap:15px; padding-bottom:15px; border-bottom:1px solid #ffffff35; }
-    .logo { width:clamp(130px,19vw,205px); max-height:100px; object-fit:contain; }
-    .tagline { text-align:right; font-size:clamp(.61rem,1.6vw,.86rem); letter-spacing:.12em; font-weight:800; }
-    h1 { font-size:clamp(1.9rem,5vw,3.5rem); line-height:1.08; text-align:center; margin:25px 0 8px; }
-    h1 span { color:var(--cyan); }
-    .sub { text-align:center; color:#c6d9e4; margin:0 0 22px; font-size:.96rem; }
-    .frame { padding:3px; border-radius:19px; background:linear-gradient(115deg,var(--cyan),#172537 50%,var(--red)); box-shadow:0 18px 60px #000c; }
-    .box { background:#07101b; border-radius:16px; overflow:hidden; }
-    .bar { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px 16px; font-weight:800; font-size:.83rem; letter-spacing:.04em; }
-    .dot { display:inline-block; vertical-align:baseline; width:9px; height:9px; margin-right:8px; border-radius:50%; background:#8caab8; }
-    .dot.on { background:var(--red); box-shadow:0 0 14px var(--red); }
-    .state { color:#96e6f1; font-size:.7rem; }
-    .screen { width:100%; aspect-ratio:16/9; position:relative; background:#020407; }
-    iframe { display:block; width:100%; height:100%; border:0; }
-    .controls { padding:12px; display:flex; flex-wrap:wrap; gap:10px; }
-    button, .link { border:1px solid #3b8194; border-radius:9px; background:#122537; color:#fff; padding:11px 16px; font:700 .82rem system-ui; cursor:pointer; text-decoration:none; }
-    button[aria-pressed="true"] { background:#1d5162; border-color:var(--cyan); }
-    button:hover, .link:hover { background:#1d4154; }
-    button:focus-visible, .link:focus-visible { outline:3px solid var(--cyan); outline-offset:3px; }
-    .spacer { flex:1; }
-    #message { text-align:center; min-height:24px; color:#c5d9e3; font-size:.84rem; margin:18px 0; }
-    footer { text-align:center; margin-top:28px; font-size:.78rem; color:#c3d4dd; }
-    footer strong { color:var(--cyan); }
-    @media (max-width:530px) { .controls { gap:7px; } button, .link { padding:10px; font-size:.74rem; } }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080b14">
+<meta name="description" content="Señal continua COYOTV desde nuestro servidor, con respaldo automático cuando termina una emisión.">
+<title>En vivo | COYOTV</title>
+<link rel="icon" href="assets/coyotv-logo.png">
+<link rel="stylesheet" href="site.css?v=20261123-2">
 </head>
 <body>
-<div class="container">
-  <header>
-    <a href="./" aria-label="Ir a la portada de COYOTV"><img class="logo" src="assets/coyotv-logo.png" alt="COYOTV"></a>
-    <div class="tagline">TELEVISIÓN DIGITAL<br>DESDE NEZA PARA EL MUNDO</div>
-  </header>
-  <main>
-    <h1><span>COYOTV</span> EN VIVO</h1>
-    <p class="sub">Nuestra señal, desde Neza para el Mundo.</p>
-    <div class="frame"><div class="box">
-      <div class="bar"><div><span id="dot" class="dot"></span><span id="heading">COYOTV · SEÑAL CONTINUA</span></div><span class="state" id="state">24/7</span></div>
-      <div class="screen" id="screen"><iframe id="player" src="https://live.coyotv.online/coyotv/main?autoplay=false&amp;muted=false&amp;playsinline=true" title="COYOTV 24/7" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
-      <div class="controls">
-        <a class="link" href="https://live.coyotv.online/coyotv/main" target="_blank" rel="noopener noreferrer">↗ Abrir señal</a>
-        <span class="spacer"></span>
-        <button type="button" id="fullscreen">⛶ Pantalla completa</button>
-      </div>
-    </div></div>
-    <p id="message" role="status" aria-live="polite">La programación continúa con los videos de respaldo del VPS cuando no hay señal del encoder.</p>
-    <div style="text-align:center"><a class="link" href="./">← Volver a la portada</a></div>
-  </main>
-  <footer><strong>COYOTV</strong> · DESDE NEZA PARA EL MUNDO</footer>
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+<div class="backdrop" aria-hidden="true"></div><div class="ambient" aria-hidden="true"></div><div class="scan" aria-hidden="true"></div>
+<div class="shell">
+<header class="header">
+<a href="index.html" aria-label="COYOTV: ir al inicio"><img class="brand" src="assets/coyotv-logo.png" alt="Logotipo de COYOTV"></a>
+<div class="headcopy">COYOTV · TELEVISIÓN DIGITAL<br>DESDE NEZA PARA EL MUNDO</div>
+</header>
+<nav class="main-nav" aria-label="Menú principal"><a href="index.html">Inicio</a><a href="envivo.html" aria-current="page">En vivo</a><a href="programas.html">Programas</a><a href="videos.html">Videos</a><a href="comedor.html">Comedor</a><a href="aliados.html">Aliados</a></nav>
+<main id="contenido"><div class="cabecera-pagina"><p class="kicker">COYOTV 24/7</p><h1>SEÑAL <em>EN VIVO</em></h1><p>Una sola señal: transmisión del encoder y programación de respaldo del VPS.</p></div><section aria-label="Señal de Coyotv" class="liveframe"><div class="livebox"><div class="topbar"><span class="air"><i></i> SEÑAL COYOTV</span><span class="badge" id="air-label">SEÑAL CONTINUA · 24/7</span></div><div class="videobox" id="videobox"><iframe allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen="" id="player" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://live.coyotv.online/coyotv/main?autoplay=false&amp;muted=false&amp;playsinline=true" title="COYOTV · Señal continua 24/7"></iframe></div><div class="controls"><a class="btn" href="https://live.coyotv.online/coyotv/main" rel="noopener noreferrer" target="_blank">↗ Abrir señal aparte</a><button class="btn push" id="full" type="button">⛶ Pantalla completa</button></div></div></section><p class="status" id="status">Pulsa reproducir para escuchar. La transmisión se mantiene en la misma dirección aunque cambie al contenido de respaldo.</p></main>
+<footer class="footer"><strong>COYOTV</strong> · DESDE NEZA PARA EL MUNDO · <span id="year"></span><div class="footer-links"><a href="index.html">Inicio</a><a href="videos.html">Videos</a><a href="aliados.html">Contacto y patrocinios</a></div></footer>
 </div>
-<script>
-'use strict';
-document.getElementById('dot').classList.add('on');
-document.getElementById('fullscreen').addEventListener('click', async () => {
-  const screen = document.getElementById('screen');
-  try {
-    if (document.fullscreenElement) await document.exitFullscreen();
-    else await screen.requestFullscreen();
-  } catch (_) {
-    document.getElementById('message').textContent = 'Utiliza el botón de pantalla completa del reproductor.';
-  }
-});
-</script>
-</body>
-</html>
+<script src="site.js?v=20261123-2" defer></script>
+
+</body></html>
